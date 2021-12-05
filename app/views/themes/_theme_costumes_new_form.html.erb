@@ -1,0 +1,49 @@
+<%= form_with(model: @costume, local: true) do |f| %>
+
+  <%= f.hidden_field :owner_id, value: current_user.id %>
+
+  <div class="form-group">
+    <%= f.label :image %>
+
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :title %>
+
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :current_availability %>
+
+    <%= f.select :current_availability, options_for_select(Costume.current_availabilities.keys), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: "3", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location %>
+
+    <%= f.text_field :location, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :theme_id, value: @theme.id %>
+
+  <div class="form-group">
+    <%= f.label :costume_type %>
+
+    <%= f.select :costume_type, options_for_select(Costume.costume_types.keys), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :size %>
+
+    <%= f.select :size, options_for_select(Costume.sizes.keys), {}, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Create costume", class: "btn btn-block btn-outline-secondary" %>
+<% end %>

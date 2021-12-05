@@ -1,0 +1,49 @@
+<% was_validated = user.errors.any? %>
+
+<%= form_with(model: user, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <div class="form-group">
+    <% first_name_class = "form-control" %>
+    <% first_name_was_invalid = user.errors.include?(:first_name) %>
+
+    <% if was_validated %>
+      <% if first_name_was_invalid %>
+        <% first_name_class << " is-invalid" %>
+      <% else %>
+        <% first_name_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: first_name_class, placeholder: "Enter first name" %>
+    <% if first_name_was_invalid %>
+      <% user.errors.full_messages_for(:first_name).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% last_name_class = "form-control" %>
+    <% last_name_was_invalid = user.errors.include?(:last_name) %>
+
+    <% if was_validated %>
+      <% if last_name_was_invalid %>
+        <% last_name_class << " is-invalid" %>
+      <% else %>
+        <% last_name_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: last_name_class, placeholder: "Enter last name" %>
+    <% if last_name_was_invalid %>
+      <% user.errors.full_messages_for(:last_name).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

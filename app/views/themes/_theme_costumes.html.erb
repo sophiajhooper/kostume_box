@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Costumes
+
+    <a data-toggle="collapse" href="#theme_costumes_new_form">
+      Add costume
+    </a>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @theme.costumes.each do |costume| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <%= link_to costume, costume %>
+
+        <% if current_user == costume.owner %>
+          <%= link_to costume, method: :delete do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        <% end %>
+
+      </li>
+    <% end %>
+
+    <div class="card-footer">
+      <div class="collapse" id="theme_costumes_new_form">
+        <%= render partial: "themes/theme_costumes_new_form" %>
+      </div>
+    </div>
+
+  </ul>
+</div>
