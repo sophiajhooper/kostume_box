@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Reviewed Costumes
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @user.reviewed_costumes.each do |costume| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <a href="/costumes/<%= costume.id %>">
+          <%= costume %>
+        </a>
+
+      </li>
+    <% end %>
+
+  </ul>
+</div>

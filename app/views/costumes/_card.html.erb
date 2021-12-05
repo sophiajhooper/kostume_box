@@ -1,0 +1,77 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Costume #<%= costume.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Owner</dt>
+      <dd>
+        <% if @costume.owner.present? %>
+          <%= link_to costume.owner, costume.owner %>
+        <% end %>
+      </dd>
+
+      <dt>Image</dt>
+      <dd>
+        <%= cl_image_tag @costume.image, class: "img-fluid" %>
+      </dd>
+
+      <dt>Title</dt>
+      <dd><%= costume.title %></dd>
+
+      <dt>Current availability</dt>
+      <dd><%= costume.current_availability %></dd>
+
+      <dt>Description</dt>
+      <dd><%= costume.description %></dd>
+
+      <dt>Location</dt>
+      <dd>
+        <div>
+          <%= render partial: "costumes/one_photo_map" %>
+        </div>
+      </dd>
+
+      <dt>Theme</dt>
+      <dd>
+        <% if @costume.theme.present? %>
+          <%= link_to costume.theme, costume.theme %>
+        <% end %>
+      </dd>
+
+      <dt>Costume type</dt>
+      <dd><%= costume.costume_type %></dd>
+
+      <dt>Size</dt>
+      <dd><%= costume.size %></dd>
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back costume, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <div class="col">
+        <% if current_user == @costume.owner %>
+          <%= link_to edit_costume_url(costume), class: "btn btn-block btn-sm btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <% if current_user == @costume.owner %>
+          <%= link_to costume, method: :delete, data: { confirm: "Do you really want to delete this costume?" }, class: "btn btn-block btn-outline-secondary" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(costume.updated_at) %> ago
+  </div>
+</div>

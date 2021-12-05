@@ -1,0 +1,56 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Review #<%= review.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Reviewer</dt>
+      <dd>
+        <% if @review.reviewer.present? %>
+          <%= link_to review.reviewer, review.reviewer %>
+        <% end %>
+      </dd>
+
+      <dt>Review text</dt>
+      <dd><%= review.review_text %></dd>
+
+      <dt>Costume</dt>
+      <dd>
+        <% if @review.costume.present? %>
+          <%= link_to review.costume, review.costume %>
+        <% end %>
+      </dd>
+
+      <dt>Star rating</dt>
+      <dd><%= review.star_rating %></dd>
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back review, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <div class="col">
+        <% if current_user == @review.reviewer %>
+          <%= link_to edit_review_url(review), class: "btn btn-block btn-sm btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <% if current_user == @review.reviewer %>
+          <%= link_to review, method: :delete, data: { confirm: "Do you really want to delete this review?" }, class: "btn btn-block btn-outline-secondary" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(review.updated_at) %> ago
+  </div>
+</div>

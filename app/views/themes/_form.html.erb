@@ -1,0 +1,27 @@
+<% was_validated = theme.errors.any? %>
+
+<%= form_with(model: theme, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <div class="form-group">
+    <% theme_class = "form-control" %>
+    <% theme_was_invalid = theme.errors.include?(:theme) %>
+
+    <% if was_validated %>
+      <% if theme_was_invalid %>
+        <% theme_class << " is-invalid" %>
+      <% else %>
+        <% theme_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :theme %>
+    <%= f.text_field :theme, class: theme_class, placeholder: "Enter theme" %>
+    <% if theme_was_invalid %>
+      <% theme.errors.full_messages_for(:theme).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

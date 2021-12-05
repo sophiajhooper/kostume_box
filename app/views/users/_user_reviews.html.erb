@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Reviews
+
+    <a data-toggle="collapse" href="#user_reviews_new_form">
+      Add review
+    </a>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @user.reviews.each do |review| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <%= link_to review, review %>
+
+      </li>
+    <% end %>
+
+    <div class="card-footer">
+      <div class="collapse" id="user_reviews_new_form">
+        <%= render partial: "users/user_reviews_new_form" %>
+      </div>
+    </div>
+
+  </ul>
+</div>
